@@ -3,6 +3,7 @@
 3. Run:
 
 ```
+cd standardtest #/wherever/git/standardtest/standardtest
 docker-compose build
 docker volume create --name=iatidata
 docker-compose up #Followed by CTRL+BREAK
