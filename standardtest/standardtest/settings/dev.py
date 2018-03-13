@@ -16,4 +16,4 @@ try:
 except ImportError:
     pass
 
-SECRET_KEY = DEV_SECRET_KEY
+SECRET_KEY = 'dontusethisinproduction'

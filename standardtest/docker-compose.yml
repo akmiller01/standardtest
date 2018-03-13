@@ -1,0 +1,34 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    volumes:
+      - iatidata:/var/lib/postgresql/data
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:8080"
+      - "443:443"
+    volumes:
+      - ./:/src
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./ssl:/etc/ssl/
+      - ./static:/static
+    depends_on:
+      - web
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/src"
+    expose:
+      - "8080"
+    depends_on:
+      - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=standardtest.settings.dev
+
+volumes:
+  iatidata:
+    external: true
